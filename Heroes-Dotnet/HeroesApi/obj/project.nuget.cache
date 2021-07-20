@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "y1A9j4Ojs2nOmZnERk2jVYjpYdKUpgEUztn5j8HIIhEQ+NVkWbnj65jR8GIDSic3XE/pGpph8MtN5/ZmYz7HVw==",
+  "dgSpecHash": "IsbuY1/uTKp+L9OcE8fKFRh3bM1eYrpZqnTQhoqIN1qSe7sV66ck1x7+TbSO+9ZQkjdjP8pNvKaEy+iw/Wb/YA==",
   "success": true,
-  "projectFilePath": "C:\\Repos\\klazar-heroine\\Heroes-Dotnet\\HeroesApi\\HeroesApi.csproj",
+  "projectFilePath": "C:\\HACAD\\klazar-heroine\\Heroes-Dotnet\\HeroesApi\\HeroesApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\K.Lazar\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\3.1.7\\microsoft.aspnetcore.authentication.jwtbearer.3.1.7.nupkg.sha512",
     "C:\\Users\\K.Lazar\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",

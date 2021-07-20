@@ -1,4 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterModule } from '@angular/router';
 
 import { HeroDetailComponent } from './hero-detail.component';
 
@@ -6,12 +8,16 @@ describe('HeroDetailComponent', () => {
   let component: HeroDetailComponent;
   let fixture: ComponentFixture<HeroDetailComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ HeroDetailComponent ]
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [HeroDetailComponent],
+      imports: [
+        HttpClientTestingModule,
+        RouterModule.forRoot([])
+      ]
     })
-    .compileComponents();
-  }));
+      .compileComponents();
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(HeroDetailComponent);

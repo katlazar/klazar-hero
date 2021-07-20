@@ -6,7 +6,6 @@ import {
   HttpInterceptor,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../environments/environment';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
@@ -15,15 +14,12 @@ export class TokenInterceptor implements HttpInterceptor {
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
-  ): Observable<HttpEvent<any>> {
-    return next.handle(
-      request.clone({
+    ): Observable<HttpEvent<any>> {
+      const reqClone = request.clone({
         setHeaders: {
-          Authorization: `Bearer ${sessionStorage.getItem(
-            environment.tokenStorageKey
-          )}`,
+          Authorization: `Bearer ${sessionStorage.getItem('token')}`,
         },
-      })
-    );
+      });
+      return next.handle(reqClone);
+    }
   }
-}

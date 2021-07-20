@@ -1,11 +1,18 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": false
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
     "angular-tour-of-heroes": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "css"
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -121,8 +128,6 @@
       }
     }
   },
-  "defaultProject": "angular-tour-of-heroes",
-  "cli": {
-    "analytics": "f5545d58-2907-4f43-bab3-22eb6cb93a0b"
-  }
+  "defaultProject": "angular-tour-of-heroes"
+  
 }

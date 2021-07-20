@@ -4,14 +4,15 @@ import { Observable, of } from 'rxjs';
 import { MessageService } from './message.service';
 import { Hero } from './hero';
 import { catchError, map, tap } from 'rxjs/operators';
+import { TOKEN } from './token';
 
 
 @Injectable({providedIn: 'root'})
 
 export class HeroService {
 
-  //private heroesUrl = '/api/heroitems';  // URL to web api
-  private heroesUrl = 'http://localhost:80/api/heroitems';  // URL to web api - dotnet
+  private heroesUrl = '/api/heroitems';  // URL to web api
+  //private heroesUrl = 'http://localhost:80/api/heroitems';  // URL to web api - dotnet
   //private heroesUrl = 'http://localhost:8080/api/heroes';  // URL to web api - golang
   //private heroesUrl = "";  // URL to web api - static files
 
@@ -22,7 +23,9 @@ export class HeroService {
   constructor(
     private http: HttpClient,
     private messageService: MessageService
-    ) {}
+    ) {
+      sessionStorage.setItem('token', TOKEN);
+    }
 
   /** GET heroes from the server */
   getHeroes(): Observable<Hero[]> {

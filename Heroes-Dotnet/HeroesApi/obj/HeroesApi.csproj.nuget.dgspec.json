@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Repos\\klazar-heroine\\Heroes-Dotnet\\HeroesApi\\HeroesApi.csproj": {}
+    "C:\\HACAD\\klazar-heroine\\Heroes-Dotnet\\HeroesApi\\HeroesApi.csproj": {}
   },
   "projects": {
-    "C:\\Repos\\klazar-heroine\\Heroes-Dotnet\\HeroesApi\\HeroesApi.csproj": {
+    "C:\\HACAD\\klazar-heroine\\Heroes-Dotnet\\HeroesApi\\HeroesApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Repos\\klazar-heroine\\Heroes-Dotnet\\HeroesApi\\HeroesApi.csproj",
+        "projectUniqueName": "C:\\HACAD\\klazar-heroine\\Heroes-Dotnet\\HeroesApi\\HeroesApi.csproj",
         "projectName": "HeroesApi",
-        "projectPath": "C:\\Repos\\klazar-heroine\\Heroes-Dotnet\\HeroesApi\\HeroesApi.csproj",
+        "projectPath": "C:\\HACAD\\klazar-heroine\\Heroes-Dotnet\\HeroesApi\\HeroesApi.csproj",
         "packagesPath": "C:\\Users\\K.Lazar\\.nuget\\packages\\",
-        "outputPath": "C:\\Repos\\klazar-heroine\\Heroes-Dotnet\\HeroesApi\\obj\\",
+        "outputPath": "C:\\HACAD\\klazar-heroine\\Heroes-Dotnet\\HeroesApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\K.Lazar\\AppData\\Roaming\\NuGet\\NuGet.Config"
