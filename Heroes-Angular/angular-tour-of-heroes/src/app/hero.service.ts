@@ -12,14 +12,14 @@ import { TOKEN } from './token';
 export class HeroService {
 
   private heroesUrl = '/api/heroitems';  // URL to web api
-  //private heroesUrl = 'http://localhost:80/api/heroitems';  // URL to web api - dotnet
-  //private heroesUrl = 'http://localhost:8080/api/heroes';  // URL to web api - golang
-  //private heroesUrl = "";  // URL to web api - static files
+
+
+
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-  
+
   constructor(
     private http: HttpClient,
     private messageService: MessageService
@@ -100,14 +100,14 @@ export class HeroService {
       catchError(this.handleError<Hero[]>('searchHeroes', []))
     );
   }
-  
-  /**
-  * Handle Http operation that failed.
-  * Let the app continue.
-  * @param operation - name of the operation that failed
-  * @param result - optional value to return as the observable result
+
+  /*
+   Handle Http operation that failed.
+   Let the app continue.
+   @param operation - name of the operation that failed
+   @param result - optional value to return as the observable result
   */
-  private handleError<T>(operation = 'operation', result?: T) {
+  private handleError<T>(operation = 'operation', result?: T): any {
     return (error: any): Observable<T> => {
 
       // TODO: send the error to remote logging infrastructure
@@ -122,7 +122,7 @@ export class HeroService {
   }
 
   /** Log a HeroService message with the MessageService */
-  private log(message: string) {
+  private log(message: string): any {
     this.messageService.add(`HeroService: ${message}`);
   }
 }
