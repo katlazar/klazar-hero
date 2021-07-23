@@ -3,7 +3,7 @@
 groupName=klazar_rg
 registryName=acad4heroes
 containerName=golangcont
-imageName=acad4heroes.azurecr.io/katlaz-goapi:v3
+imageName=acad4heroes.azurecr.io/katlaz-goapi:v5
 line="==============================================="
 
 
