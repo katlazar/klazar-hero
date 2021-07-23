@@ -11,7 +11,7 @@ import (
 	"log"
 )
 
-var key = []byte("no te preocupes")
+var key = []byte("no-te-preocupes-no-te-preocupes")
 
 func main() {
 	router := gin.Default()

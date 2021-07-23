@@ -21,8 +21,7 @@ namespace HeroesApi
 {
     public class Startup
     {
-        //readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-        private const string Name = "HeroesCORS";
+        private const string Name = "_myAllowSpecificOrigins";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -33,9 +32,12 @@ namespace HeroesApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<HeroContext>(opt =>
+               opt.UseInMemoryDatabase("HeroesList"));
+
             services.AddCors(options =>
             {
-                options.AddPolicy(name: Name, //MyAllowSpecificOrigins,
+                options.AddPolicy(Name, 
                     builder =>
                     {
                         // AllowAnyMethod needed for PUT request when changing hero name
@@ -46,9 +48,7 @@ namespace HeroesApi
                     });
             });
 
-            services.AddDbContext<HeroContext>(opt =>
-               opt.UseInMemoryDatabase("HeroesList"));
-
+            
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
 
@@ -56,10 +56,32 @@ namespace HeroesApi
 
             // configure jwt authentication
             var appSettings = appSettingsSection.Get<AppSettings>();
-            var key = Encoding.ASCII.GetBytes(appSettings.SecretKey);
+            var key = Encoding.UTF8.GetBytes(appSettings.SecretKey);
             var audience = appSettings.Audience;
-            services.AddAuthentication(this.SetAuthenticationOptions).AddJwtBearer(jwtBearerOptions => this.SetJwtBearerOptions(jwtBearerOptions, key, audience));
-
+            
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.SaveToken = true;
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true, 
+                        ValidateAudience = true, 
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(key),
+                        AudienceValidator = (audiences, securityToken, validationParameters) =>
+                        {
+                            return audiences.Contains(audience);
+                        },
+                        IssuerValidator = (issuer, securityToken, validationParameters) =>
+                        {
+                            if (issuer.Equals("dtpoland.com"))
+                                return issuer;
+                            else
+                                throw new SecurityTokenInvalidIssuerException("Wrong issuer");
+                        }
+                    };
+                });
             services.AddControllers();
         }
 
@@ -70,9 +92,10 @@ namespace HeroesApi
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthentication();
+            app.UseAuthorization();
 	        app.UseFileServer(new FileServerOptions
             {
                 FileProvider = new PhysicalFileProvider(
@@ -80,21 +103,16 @@ namespace HeroesApi
                 RequestPath = "",
 
             });		
-            //app.UseHttpsRedirection();
             DefaultFilesOptions options = new DefaultFilesOptions();
             options.DefaultFileNames.Clear();
-            options.DefaultFileNames.Add("index.html");
+            
             app.UseDefaultFiles(options);
             app.UseStaticFiles();  
-            app.UseCors(Name); //MyAllowSpecificOrigins); 
-            app.UseAuthorization();
+            app.UseCors(Name); 
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                // catch non existing path (except files, e.g. ".../dashboard.png" - this still gets the error 404)
-                endpoints.MapFallbackToFile("/index.html");
-                // ... and catch file errors too    
-                endpoints.MapFallbackToFile("{*path:file}", "/index.html");
             });
             
         }
@@ -102,24 +120,6 @@ namespace HeroesApi
         {
             authenticationOptions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
             authenticationOptions.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-        }
-
-        private void SetJwtBearerOptions(JwtBearerOptions jwtBearerOptions, byte[] key, string audience)
-        {
-            jwtBearerOptions.RequireHttpsMetadata = false;
-            jwtBearerOptions.SaveToken = true;
-            jwtBearerOptions.TokenValidationParameters = new TokenValidationParameters
-            {
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(key),
-                ValidateIssuer = false,
-                ValidateAudience = true,
-
-                AudienceValidator = (audiences, token, validationParameters) =>
-                {
-                    return audiences.Contains(audience);
-                },
-            };
         }
 
         private class AppSettings

@@ -1,7 +1,7 @@
 ### .NET Core 3.1 ANGULAR APP Dockerfile ###
 
 # Build Angular-Client
-FROM node:alpine AS ang-client
+FROM node:erbium-alpine3.14 AS ang-client
 RUN mkdir /app
 WORKDIR /app
 COPY ./Heroes-Angular/angular-tour-of-heroes/package.json ./
