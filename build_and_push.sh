@@ -6,6 +6,12 @@ imageName=acad4heroes.azurecr.io/katlaz-goapi:v5
 line="==============================================="
 
 echo $line
+echo "  AZURE LOGIN"
+echo $line
+az login
+echo
+
+echo $line
 echo "  DOCKER IMAGE BUILDING"
 echo $line
 docker build -t $imageName -f Dockerfile-go .

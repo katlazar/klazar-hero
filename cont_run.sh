@@ -6,6 +6,11 @@ containerName=golangcont
 imageName=acad4heroes.azurecr.io/katlaz-goapi:v5
 line="==============================================="
 
+echo $line
+echo "  AZURE LOGIN"
+echo $line
+az login
+echo
 
 echo $line
 echo "  RUNNING NEW CONTAINER FROM CONTAINER REGISTRY"
