@@ -15,6 +15,7 @@ echo "  AZURE LOGIN"
 echo $line
 echo read -p "Please enter Azure password: " -s azPassword
 echo az login -u $azLogin -p $azPassword
+az login
 echo az account set --subscription $subscriptionID
 echo az account show
 echo
@@ -23,12 +24,12 @@ echo $line
 echo "  DOCKER IMAGE BUILDING"
 echo $line
 docker build -t $imageName -f Dockerfile-go .
+docker build -t $imName -f Dockerfile-go .
 echo
 
 echo $line
 echo "  AZURE GROUP CREATING"
 echo $line
-az login
 az group create --name $groupName --location westeurope  
 echo
 
