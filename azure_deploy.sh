@@ -2,6 +2,7 @@
 
 azLogin=k.lazar@dtpoland.com
 groupName=klazar_rg
+imName=hero-go
 registryName=acad4heroes
 containerName=golangcont
 acrName=acad4heroes.azurecr.io
@@ -41,6 +42,7 @@ echo $line
 echo "  PUSHING IMAGE TO CONTAINER REGISTRY"
 echo $line
 docker push $imageName
+docker push $imName
 echo
 
 echo $line
