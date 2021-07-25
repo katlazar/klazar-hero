@@ -13,10 +13,10 @@ line="==============================================="
 echo $line
 echo "  AZURE LOGIN"
 echo $line
-read -p "Please enter Azure password: " -s azPassword
-az login -u $azLogin -p $azPassword
-az account set --subscription $subscriptionID
-az account show
+echo read -p "Please enter Azure password: " -s azPassword
+echo az login -u $azLogin -p $azPassword
+echo az account set --subscription $subscriptionID
+echo az account show
 echo
 
 echo $line
@@ -28,6 +28,7 @@ echo
 echo $line
 echo "  AZURE GROUP CREATING"
 echo $line
+az login
 az group create --name $groupName --location westeurope  
 echo
 
